@@ -65,4 +65,7 @@ else:
             'Не совсем тебя понимаю. Ответь, пожалуйста, '
             'Ты хочешь сыграть еще раз? (Да/Нет): '
             )
-    number_guessing_game()
+    if question == 'Да' or question == 'да':
+        number_guessing_game()
+    elif question == 'Нет' or question == 'нет':
+        print('Хорошо, если что - игра всегда ждет тебя, хорошего настроения!))')
