@@ -1,10 +1,10 @@
 import random
 
 
-digits = '0123456789'
-lowercase_letters = 'abcdefghijklmnopqrstuvwxyz'
-uppercase_letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-punctuation = '!#$%&*+-=?@^_'
+DIGITS = '0123456789'
+LOWERCASE_LETTERS = 'abcdefghijklmnopqrstuvwxyz'
+UPPERCASE_LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+PUNCTUATION = '!#$%&*+-=?@^_'
 
 chars = ''
 
@@ -36,7 +36,10 @@ def filling_chars(variable, char, chars):
 def generate_password(length, chars, selected_chars):
 
     while length < len(selected_chars):
-        print(f'С выбранным набором категорий элементов минимальная допустимая длина {len(selected_chars)}')
+        print(
+            'С выбранным набором категорий элементов '
+            f'минимальная допустимая длина {len(selected_chars)}'
+        )
         length = input('Введите корректную длину пароля: ')
     length = int(length)
 
@@ -95,36 +98,34 @@ while len(selected_chars) == 0:
     symbols_pass = include_pass(symbols_pass, 'символы (!#$%&*+-=?@^_)')
 
     # Исключить неоднозначные символы (il1Lo0O)
-    exclude_symbol_pass = input('Исключить ли неоднозначные символы (il1Lo0O) из пароля (да/нет): ')
+    exclude_symbol_pass = input(
+        'Исключить ли неоднозначные символы '
+        '(il1Lo0O) из пароля (да/нет): '
+        )
     while exclude_symbol_pass not in variants_answer_yes and exclude_symbol_pass not in variants_answer_no:
-            print()
-            print('Не понял ваш ответ.')
-            exclude_symbol_pass = input(f'Исключить ли неоднозначные символы (il1Lo0O) из пароля (да/нет): ')
+        print()
+        print('Не понял ваш ответ.')
+        exclude_symbol_pass = input(f'Исключить ли неоднозначные символы (il1Lo0O) из пароля (да/нет): ')
 
-    chars = filling_chars(digits_pass, digits, chars)
-    chars = filling_chars(uppercase_letters_pass, uppercase_letters, chars)
-    chars = filling_chars(lowercase_letters_pass, lowercase_letters, chars)
-    chars = filling_chars(symbols_pass, punctuation, chars)
+    chars = filling_chars(digits_pass, DIGITS, chars)
+    chars = filling_chars(uppercase_letters_pass, UPPERCASE_LETTERS, chars)
+    chars = filling_chars(lowercase_letters_pass, LOWERCASE_LETTERS, chars)
+    chars = filling_chars(symbols_pass, PUNCTUATION, chars)
 
     if len(selected_chars) == 0:
         print()
         print('⚠️ Необходимо выбрать хотя бы одну категорию символов.')
 
 
-
-
-# Проверка на выбор хотя бы одной категории
-
-
 if exclude_symbol_pass in variants_answer_yes:
-    for l in 'il1Lo0O':
-        if l in chars:
-            chars = chars.replace(l, '')
+    for char in 'il1Lo0O':
+        if char in chars:
+            chars = chars.replace(char, '')
 
-    for k in range(len(selected_chars)):
-        for l in 'il1Lo0O':
-            if l in selected_chars[k]:
-                selected_chars[k] = selected_chars[k].replace(l, '')
+    for index in range(len(selected_chars)):
+        for char in 'il1Lo0O':
+            if char in selected_chars[index]:
+                selected_chars[index] = selected_chars[index].replace(char, '')
 
 for i in range(1, number_pass + 1):
     print()
